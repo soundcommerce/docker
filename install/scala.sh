@@ -1,8 +1,10 @@
 #!/bin/sh
 
-sh ./assure_curl.sh
+if [ -e /etc/alpine-release ]; then
+    which curl >> /dev/null 2>&1 || apk add --no-cache curl
+fi
 
-scala_version=2.12.4
+scala_version=${1}
 install_dir=/usr/share/scala-$scala_version
 
 mkdir -p $install_dir
